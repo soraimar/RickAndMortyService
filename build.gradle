@@ -24,3 +24,11 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'src.main.java.com.example.RickAndMortyService.RickAndMortyServiceApplication.java'
+		)
+	}
+}

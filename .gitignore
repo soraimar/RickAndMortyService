@@ -35,10 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-
-.gradle/
-build/
-out/
-*.iml
-.idea/
