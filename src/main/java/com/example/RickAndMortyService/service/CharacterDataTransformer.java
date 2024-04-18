@@ -3,9 +3,6 @@ package com.example.RickAndMortyService.service;
 import com.example.RickAndMortyService.dto.CharacterDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class CharacterDataTransformer {
 

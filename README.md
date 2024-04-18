@@ -21,6 +21,7 @@ Clean the project (optional):
 ```
 ./gradlew clean
 ```
+
 Build the project: This step compiles your project and creates the executable JAR.
 ```
 ./gradlew build
@@ -33,6 +34,11 @@ gradle bootRun
 Run tests:
 ```
 ./gradlew test
+```
+
+Run Jacoco test coverage report (optional):
+```
+./gradlew jacocoTestReport
 ```
 
 ## API Endpoints

@@ -2,13 +2,15 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'jacoco'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -16,23 +18,50 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.projectlombok:lombok:1.18.24'
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.2.4'
-	compileOnly 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+	// Spring Boot dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Mockito for mocking in tests (if needed)
+	testImplementation 'org.mockito:mockito-core:3.6.0'
+	testImplementation 'org.mockito:mockito-junit-jupiter:3.6.0'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+	dependsOn tasks.named('test')
+	reports {
+		xml.required.set(false)
+		csv.required.set(false)
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.30
+			}
+		}
+	}
+}
+
 jar {
 	manifest {
 		attributes(
-				'Main-Class': 'src.main.java.com.example.RickAndMortyService.RickAndMortyServiceApplication.java'
+			'Main-Class': 'com.example.RickAndMortyService.RickAndMortyServiceApplication'
 		)
 	}
 }
